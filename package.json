@@ -1,6 +1,6 @@
 {
-  "name": "test-react",
-  "productName": "test-react",
+  "name": "simple-image-browser",
+  "productName": "simple-image-browser",
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".vite/build/main.js",
