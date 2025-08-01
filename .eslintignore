@@ -1,0 +1,6 @@
+forge.config.ts
+forge.env.d.ts
+vite.*.config.ts
+dist/
+.vite/
+node_modules/
