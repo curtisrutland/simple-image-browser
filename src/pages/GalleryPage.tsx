@@ -19,10 +19,6 @@ export function GalleryPage() {
       else setImageData(results);
     }
     getImages();
-    return () => {
-      setImageData(undefined);
-      setErrorMessage(undefined);
-    };
   }, [path]);
 
   return (
