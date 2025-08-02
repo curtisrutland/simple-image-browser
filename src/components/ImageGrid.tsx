@@ -6,6 +6,11 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import { FolderImageResults } from "../ipc/fs";
 import FloadingSlider from "./FloatingSlider";
+import ImageCard from "./ImageCard";
+
+const interval = 1;
+const minimum = 10;
+const maximum = 100;
 
 interface ImageListProps {
   folderImageResults: FolderImageResults;
@@ -14,29 +19,39 @@ interface ImageListProps {
 export default function ImageGrid(props: ImageListProps) {
   const { folderImageResults } = props;
   const { folderName, folderPath, imagePaths } = folderImageResults;
-  const [cols, setCols] = useState(3);
+  const [imgWidth, setImgWidth] = useState(20);
+
+  function decrement() {
+    const newVal = Math.max(minimum, imgWidth - interval);
+    setImgWidth(newVal);
+  }
+
+  function increment() {
+    const newVal = Math.min(maximum, imgWidth + interval);
+    setImgWidth(newVal);
+  }
 
   return (
     <Paper sx={{ flexGrow: 1 }}>
       <Stack gap={2}>
         <Typography variant="h6">{folderName}</Typography>
         <Typography variant="subtitle2">{folderPath}</Typography>
-        
-        <ImageList sx={{ flexGrow: 1, p: 2 }} cols={cols} gap={12}>
-          {imagePaths.map((path) => (
-            <ImageListItem key={path}>
-              <img src={path} alt={path} style={{ objectFit: "contain" }} />
-            </ImageListItem>
-          ))}
-        </ImageList>
 
-        {/* <Stack direction="row" flexWrap="wrap" gap={1}>
-          {imagePaths.map((i, index) => (
-            <img key={index} src={i} alt="image" />
+        <Stack direction="row" flexWrap="wrap" gap={1} justifyContent="space-around" sx={{ p: 2 }}>
+          {imagePaths.map((i) => (
+            <ImageCard key={i} imagePath={i} width={imgWidth} />
           ))}
-        </Stack> */}
+        </Stack>
       </Stack>
-      <FloadingSlider value={cols} onChange={setCols} />
+      <FloadingSlider
+        value={imgWidth}
+        onChange={setImgWidth}
+        min={minimum}
+        max={maximum}
+        step={1}
+        onDecrement={decrement}
+        onIncrement={increment}
+      />
     </Paper>
   );
 }
