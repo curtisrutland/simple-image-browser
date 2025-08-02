@@ -4,13 +4,12 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+// import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import MenuIcon from "@mui/icons-material/Menu";
-import AddIcon from "@mui/icons-material/Add";
-// import { Link } from "@tanstack/react-router";
-// import { LinkIconButton } from "../components/links";
-import { LinkIconButton } from "@/components/links";
+import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
+import { LinkIconButton } from "../components/links";
+import { useRouter, useCanGoBack } from "@tanstack/react-router";
 
 interface NavAppBarProps {
   onMenuClick?: () => void;
@@ -18,6 +17,8 @@ interface NavAppBarProps {
 
 export default function NavAppBar(props: NavAppBarProps) {
   const { onMenuClick } = props;
+  const router = useRouter();
+  const canGoBack = useCanGoBack();
 
   return (
     <AppBar position="sticky">
@@ -29,21 +30,23 @@ export default function NavAppBar(props: NavAppBarProps) {
           Simple Image Browser
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
-        <Tooltip title="Add Folder">
+        <Tooltip title="Import Folder">
           <LinkIconButton to="/">
-            <AddIcon />
+            <CreateNewFolderIcon />
           </LinkIconButton>
         </Tooltip>
         <Tooltip title="Back">
-          <IconButton onClick={() => history.back()}>
-            <ChevronLeftIcon />
-          </IconButton>
+          <span>
+            <IconButton disabled={!canGoBack} onClick={() => router.history.back()}>
+              <ArrowBackIcon />
+            </IconButton>
+          </span>
         </Tooltip>
-        <Tooltip title="Forward">
+        {/* <Tooltip title="Forward">
           <IconButton onClick={() => history.forward()}>
             <ChevronRightIcon />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
       </Toolbar>
     </AppBar>
   );

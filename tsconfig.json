@@ -13,9 +13,6 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "strict": true,
-    "strictNullChecks": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "strictNullChecks": true
   }
 }
