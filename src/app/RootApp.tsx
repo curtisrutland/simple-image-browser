@@ -27,3 +27,7 @@ const rootRoute = createRootRoute({
 });
 
 export default rootRoute;
+
+export function getRootRoute() {
+  return rootRoute;
+}

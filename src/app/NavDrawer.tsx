@@ -29,14 +29,11 @@ export default function NavDrawer(props: NavDrawerProps) {
               <ListItemText primary="Import Folders" />
             </LinkListItemButton>
           </ListItem>
-          {/* <ListItem disablePadding>
-            <LinkListItemButton to="/gallery" search={{ path: "/Users/curtis/workspace/laser-projects/derek-cats" }}>
-              <ListItemIcon>
-                <ImageIcon />
-              </ListItemIcon>
-              <ListItemText primary="Gallery" />
+          <ListItem disablePadding>
+            <LinkListItemButton to="/blank">
+              <ListItemText primary="Blank" />
             </LinkListItemButton>
-          </ListItem> */}
+          </ListItem>
         </List>
       </Box>
     </Drawer>

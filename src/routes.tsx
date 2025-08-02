@@ -1,11 +1,13 @@
 import { createRouter } from "@tanstack/react-router";
 import galleryRoute from "./pages/GalleryPage";
 import importRoute from "./pages/ImportPage";
+import blankPageRoute from "./pages/BlankPage";
 import rootRoute from "./app/RootApp";
 
 const routeTree = rootRoute.addChildren([
   importRoute,
   galleryRoute,
+  blankPageRoute,
 ]);
 
 export const router = createRouter({ routeTree });
