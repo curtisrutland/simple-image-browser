@@ -2,10 +2,13 @@ import Box from "@mui/material/Box";
 import FolderImporter from "../components/FolderImporter";
 import { createRoute, useRouter } from "@tanstack/react-router";
 import rootRoute from "../app/RootApp";
-import { FolderImageResults } from "../ipc/fs";
+import { useTitle } from "../app/TitleContext";
 
 export function ImportPage() {
   const router = useRouter();
+  const { setTitle } = useTitle();
+
+  setTitle("Import Album");
 
   function handleImageFolderDrop(path: string) {
     router.navigate({ to: "/gallery", search: { path } });

@@ -20,7 +20,7 @@ interface ImageListProps {
 export default function ImageGrid(props: ImageListProps) {
   const { folderImageResults } = props;
   const { folderName, folderPath, imagePaths } = folderImageResults;
-  const [imgWidth, setImgWidth] = useState(3);
+  const [imgWidth, setImgWidth] = useState(8);
 
   function decrement() {
     const newVal = Math.max(minimum, imgWidth - interval);
@@ -35,10 +35,9 @@ export default function ImageGrid(props: ImageListProps) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Stack gap={2}>
-        <Typography variant="h6">{folderName}</Typography>
         <Typography variant="subtitle2">{folderPath}</Typography>
         <Box sx={{ p: 1 }}>
-          <ImageList cols={imgWidth} gap={8}>
+          <ImageList cols={11 - imgWidth} gap={8}>
             {imagePaths.map((path) => (
               <ImageListItem key={path}>
                 <ImageCard imagePath={path} />

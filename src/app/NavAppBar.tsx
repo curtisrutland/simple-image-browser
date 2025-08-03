@@ -12,6 +12,7 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { LinkIconButton } from "../components/links";
+import { useTitle } from "./TitleContext";
 
 interface NavAppBarProps {
   onMenuClick?: () => void;
@@ -39,6 +40,7 @@ export default function NavAppBar(props: NavAppBarProps) {
   const router = useRouter();
   const canGoBack = useCanGoBack();
   const { mode, setMode, systemMode } = useColorScheme();
+  const { title } = useTitle();
 
   // const tooltip =
   //   mode != "system"
@@ -61,7 +63,7 @@ export default function NavAppBar(props: NavAppBarProps) {
 
   return (
     <AppBar position="sticky">
-      <Toolbar>
+      <Toolbar variant="dense">
         <Tooltip title="Back">
           <span>
             <IconButton disabled={!canGoBack} sx={{ mr: 2 }} onClick={() => router.history.back()}>
@@ -79,7 +81,7 @@ export default function NavAppBar(props: NavAppBarProps) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" color="inherit" component="div" sx={{ mr: 2 }}>
-          Simple Image Browser
+          {title}
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <Tooltip title="Import Folder">
