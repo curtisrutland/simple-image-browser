@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { SnackbarProvider } from "notistack";
 import { ThemeProvider } from "./theme";
 import "./index.css";
 import NavAppBar from "./NavAppBar";
@@ -13,13 +14,15 @@ export function RootApp() {
 
   return (
     <ThemeProvider>
-      <TitleContextProvider>
-        <DropEnabledContainer>
-          <NavAppBar onMenuClick={() => setDrawerOpen(true)} />
-          <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
-          <Outlet />
-        </DropEnabledContainer>
-      </TitleContextProvider>
+      <SnackbarProvider>
+        <TitleContextProvider>
+          <DropEnabledContainer>
+            <NavAppBar onMenuClick={() => setDrawerOpen(true)} />
+            <NavDrawer open={drawerOpen} onClose={() => setDrawerOpen(false)} />
+            <Outlet />
+          </DropEnabledContainer>
+        </TitleContextProvider>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }

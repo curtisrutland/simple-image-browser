@@ -75,7 +75,7 @@ export default function FolderImporter(props: FolderImporterProps) {
       <Typography variant="h3" gutterBottom>
         {message}
       </Typography>
-      <Button onClick={handleClick}>Open Folder Dialog</Button>
+      <Button onClick={handleClick}>Or Click Here to Select a Folder</Button>
     </Paper>
   );
 }

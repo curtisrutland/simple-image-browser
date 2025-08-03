@@ -1,8 +1,10 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-import { contextBridge, webUtils, ipcRenderer, dialog } from "electron";
+import { contextBridge, webUtils, ipcRenderer, webFrame } from "electron";
 import { fs } from "./ipc/channels";
 import { GetFolderImageResults } from "./ipc/fs";
+
+webFrame.setVisualZoomLevelLimits(1, 4);
 
 contextBridge.exposeInMainWorld("fs", {
   getImagesInFolder: async (file: File): Promise<GetFolderImageResults> => {

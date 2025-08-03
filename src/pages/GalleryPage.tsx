@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createRoute } from "@tanstack/react-router";
-import rootRoute from "../app/RootApp";
+import { getRootRoute } from "../app/RootApp";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import ImageGrid from "../components/ImageGrid";
@@ -41,7 +41,7 @@ interface GallerySearch {
 }
 
 const galleryRoute = createRoute({
-  getParentRoute: () => rootRoute,
+  getParentRoute: getRootRoute,
   path: "/gallery",
   component: GalleryPage,
   validateSearch: (search: Record<string, unknown>): GallerySearch => {

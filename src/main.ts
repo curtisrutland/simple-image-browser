@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, webFrame } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
 import { registerPriviledgedSchemes, registerProtocolHandlers } from "./protocols";
@@ -25,7 +25,6 @@ const createWindow = () => {
       preload: path.join(__dirname, "preload.js"),
     },
   });
-
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);

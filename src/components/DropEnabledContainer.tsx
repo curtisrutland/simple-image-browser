@@ -1,7 +1,8 @@
 import { DragEvent, PropsWithChildren, useState } from "react";
 import { useRouter } from "@tanstack/react-router";
+import { useSnackbar } from "notistack";
 import Stack from "@mui/material/Stack";
-import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
+// import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 type DivDragEvent = DragEvent<HTMLDivElement>;
@@ -11,9 +12,10 @@ type Severity = "info" | "success" | "warning" | "error";
 export default function DropEnabledContainer(props: DropEnabledContainerProps) {
   const { children } = props;
   const router = useRouter();
-  const [open, setOpen] = useState(false);
-  const [text, setText] = useState("");
-  const [severity, setSeverity] = useState<Severity>("success");
+  const { enqueueSnackbar } = useSnackbar();
+  // const [open, setOpen] = useState(false);
+  // const [text, setText] = useState("");
+  // const [severity, setSeverity] = useState<Severity>("success");
 
   function handleDragOver(e: DivDragEvent) {
     e.preventDefault();
@@ -30,11 +32,6 @@ export default function DropEnabledContainer(props: DropEnabledContainerProps) {
     e.stopPropagation();
   }
 
-  function handleClose(_: unknown, reason?: SnackbarCloseReason) {
-    if (reason == "clickaway") return;
-    setOpen(false);
-  }
-
   async function handleDrop(e: DivDragEvent) {
     e.preventDefault();
     e.stopPropagation();
@@ -44,14 +41,14 @@ export default function DropEnabledContainer(props: DropEnabledContainerProps) {
     }
     const results = await window.fs.getImagesInFolder(possibleFolder);
     if (typeof results === "string") {
-      setText(results);
-      setSeverity("error");
-      setOpen(true);
+      enqueueSnackbar({ message: results, variant: "error", autoHideDuration: 5000 });
     } else {
       console.log(results);
-      setText("Successfully imported folder.");
-      setSeverity("success");
-      setOpen(true);
+      enqueueSnackbar({
+        message: "Successfully imported folder.",
+        variant: "success",
+        autoHideDuration: 5000,
+      });
       router.navigate({ to: "/gallery", search: { path: results.folderPath } });
     }
   }
@@ -66,19 +63,6 @@ export default function DropEnabledContainer(props: DropEnabledContainerProps) {
       onDrop={handleDrop}
     >
       {children}
-      <Snackbar
-        open={open}
-        autoHideDuration={5000}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-      >
-        <Alert severity={severity} sx={{ width: "100%" }} variant="filled" onClose={handleClose}>
-          {text}
-        </Alert>
-      </Snackbar>
     </Stack>
   );
 }

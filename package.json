@@ -49,6 +49,7 @@
     "@tanstack/react-router": "^1.130.12",
     "@tanstack/react-router-devtools": "^1.130.12",
     "electron-squirrel-startup": "^1.0.1",
+    "notistack": "^3.0.2",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   }
